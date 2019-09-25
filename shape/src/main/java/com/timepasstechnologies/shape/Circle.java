@@ -1,23 +1,20 @@
 package com.timepasstechnologies.shape;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+public class Circle extends View {
 
-public class Oval extends View {
 
     private int shapeCol, labelCol;
     private String shapeText;
     private Paint shapePaint;
 
-    public Oval(Context context, AttributeSet attrs) {
+    public Circle(Context context, AttributeSet attrs){
         super(context, attrs);
         shapePaint = new Paint();
 
@@ -31,21 +28,23 @@ public class Oval extends View {
         } finally {
             a.recycle();
         }
-    }
 
-    @SuppressLint("DrawAllocation")
+    }
     @Override
     protected void onDraw(Canvas canvas) {
 
         int viewWidthHalf = this.getMeasuredWidth()/2;
         int viewHeightHalf = this.getMeasuredHeight()/2;
-
+        int radius = 10;
+        if(viewWidthHalf>viewHeightHalf)
+            radius=viewHeightHalf-10;
+        else
+            radius=viewWidthHalf-10;
 
         shapePaint.setStyle(Paint.Style.FILL);
         shapePaint.setAntiAlias(true);
         shapePaint.setColor(shapeCol);
-        canvas.drawOval(new RectF(0,0,getWidth(),getHeight()),shapePaint);
-
+        canvas.drawCircle(viewWidthHalf, viewHeightHalf, radius, shapePaint);
         shapePaint.setColor(labelCol);
         shapePaint.setTextAlign(Paint.Align.CENTER);
         shapePaint.setTextSize(50);
@@ -53,7 +52,7 @@ public class Oval extends View {
 
     }
 
-    public int getshapeColor(){
+    public int getCircleColor(){
         return shapeCol;
     }
 
@@ -66,7 +65,7 @@ public class Oval extends View {
     }
 
 
-    public void setshapeColor(int newColor){
+    public void setCircleColor(int newColor){
         shapeCol=newColor;
         invalidate();
         requestLayout();
@@ -82,8 +81,4 @@ public class Oval extends View {
         invalidate();
         requestLayout();
     }
-
 }
-
-
-

@@ -5,21 +5,19 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
-
-public class Oval extends View {
+public class Round_Rectangle extends View {
 
     private int shapeCol, labelCol;
     private String shapeText;
-    private Paint shapePaint;
+    private Paint shapePaint,paint;
 
-    public Oval(Context context, AttributeSet attrs) {
+    public Round_Rectangle(Context context, AttributeSet attrs) {
         super(context, attrs);
-        shapePaint = new Paint();
+        paint = new Paint();
 
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
                 R.styleable.shapeValue, 0, 0);
@@ -32,24 +30,23 @@ public class Oval extends View {
             a.recycle();
         }
     }
-
     @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
 
-        int viewWidthHalf = this.getMeasuredWidth()/2;
-        int viewHeightHalf = this.getMeasuredHeight()/2;
 
+        paint.setColor(shapeCol);
+        paint.setStrokeWidth(3);
+        int a = 0;
+        int b = 0;
+        int c = getWidth();
+        int d = getHeight();
+        canvas.drawRoundRect(new RectF(a,b,c,d),50,50,paint);
 
-        shapePaint.setStyle(Paint.Style.FILL);
-        shapePaint.setAntiAlias(true);
-        shapePaint.setColor(shapeCol);
-        canvas.drawOval(new RectF(0,0,getWidth(),getHeight()),shapePaint);
-
-        shapePaint.setColor(labelCol);
-        shapePaint.setTextAlign(Paint.Align.CENTER);
-        shapePaint.setTextSize(50);
-        canvas.drawText(shapeText, viewWidthHalf, viewHeightHalf, shapePaint);
+        paint.setColor(labelCol);
+        paint.setTextAlign(Paint.Align.CENTER);
+        paint.setTextSize(50);
+        canvas.drawText(shapeText, c/2,d/2, paint);
 
     }
 
