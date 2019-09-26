@@ -57,8 +57,8 @@
 ## For Round Rectangle
 
     <com.timepasstechnologies.shape.Round_Rectangle
-        android:layout_width="174dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         custom:shapeColor="#ff0099"
         custom:shapeLabel="Round Rectangle"
         custom:labelColor="#FFD700"/>
